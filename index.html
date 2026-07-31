@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N.A. Kassar Printing Solutions — Premium Printing, Perfectly Registered</title>
+<meta name="description" content="N.A. Kassar Printing Solutions — premium flex, banner, vinyl, card and brochure printing with fast, door-to-door delivery.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink-black:#0b0b0d;
+  --panel:#141418;
+  --panel-2:#1a1a1f;
+  --line:rgba(203,161,53,0.16);
+  --paper:#f4efe4;
+  --paper-dim:#d9d2c1;
+  --gold:#cba135;
+  --gold-bright:#f2d78c;
+  --gold-deep:#8a6a1f;
+  --cyan:#19b6c9;
+  --magenta:#d13d78;
+  --text-dim:#a7a39a;
+
+  --display:'Fraunces', serif;
+  --body:'Manrope', sans-serif;
+  --mono:'Space Mono', monospace;
+
+  --container:1240px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink-black);
+  color:var(--paper);
+  font-family:var(--body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--gold);color:var(--ink-black);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+
+.wrap{max-width:var(--container);margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+
+/* registration-mark motif (from print industry crop/reg marks) */
+.reg{
+  position:relative;width:14px;height:14px;flex-shrink:0;
+  display:inline-block;
+}
+.reg::before,.reg::after{content:'';position:absolute;background:var(--gold);}
+.reg::before{width:100%;height:1px;top:50%;left:0;transform:translateY(-50%);}
+.reg::after{height:100%;width:1px;left:50%;top:0;transform:translateX(-50%);}
+.reg-circle{position:absolute;inset:2px;border:1px solid var(--gold);border-radius:50%;}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;
+}
+
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;color:var(--paper);}
+
+.btn{
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:15px 30px;
+  border-radius:2px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold) 55%,var(--gold-deep));
+  color:#191305;
+  font-weight:700;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(203,161,53,.55);}
+.btn-ghost{
+  border:1px solid rgba(244,239,228,.28);
+  color:var(--paper);
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-2px);}
+.btn .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:ripple .6s linear;pointer-events:none;}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
+
+/* ============ LOADER ============ */
+#loader{
+  position:fixed;inset:0;background:var(--ink-black);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .7s var(--ease), visibility .7s var(--ease);
+  gap:22px;
+}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-mark{
+  font-family:var(--display);font-size:15px;letter-spacing:.3em;color:var(--gold);
+  text-transform:uppercase;
+}
+.loader-bar{width:220px;height:1px;background:rgba(203,161,53,.25);position:relative;overflow:hidden;}
+.loader-bar::after{
+  content:'';position:absolute;left:-40%;top:0;height:100%;width:40%;
+  background:linear-gradient(90deg,transparent,var(--gold-bright),transparent);
+  animation:sweep 1.3s ease-in-out infinite;
+}
+.loader-cmyk{display:flex;gap:6px;}
+.loader-cmyk span{width:5px;height:5px;border-radius:50%;animation:pulse 1.4s ease-in-out infinite;}
+.loader-cmyk span:nth-child(1){background:var(--cyan);animation-delay:0s;}
+.loader-cmyk span:nth-child(2){background:var(--magenta);animation-delay:.15s;}
+.loader-cmyk span:nth-child(3){background:#e8c400;animation-delay:.3s;}
+.loader-cmyk span:nth-child(4){background:#eee;animation-delay:.45s;}
+@keyframes sweep{0%{left:-40%;}100%{left:100%;}}
+@keyframes pulse{0%,100%{opacity:.25;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+
+/* ============ PARTICLES ============ */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;}
+
+/* ============ NAV ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:26px 0;
+  transition:padding .4s var(--ease), background .4s var(--ease), border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+header.scrolled{
+  padding:14px 0;
+  background:rgba(11,11,13,.72);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom:1px solid var(--line);
+}
+nav{display:flex;align-items:center;justify-content:space-between;}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--display);font-size:20px;letter-spacing:.02em;color:var(--paper);
+}
+.logo b{color:var(--gold);font-weight:600;}
+.nav-links{display:flex;align-items:center;gap:38px;}
+.nav-links a{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-dim);position:relative;padding-bottom:4px;transition:color .3s;
+}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease);}
+.nav-links a:hover{color:var(--paper);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:16px;}
+.nav-phone{font-family:var(--mono);font-size:13px;color:var(--gold-bright);display:flex;align-items:center;gap:8px;}
+.burger{display:none;flex-direction:column;gap:5px;width:26px;z-index:600;}
+.burger span{height:1px;background:var(--paper);width:100%;transition:.3s;}
+
+@media (max-width:960px){
+  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--panel);
+    flex-direction:column;justify-content:center;align-items:flex-start;gap:28px;padding:0 40px;
+    transform:translateX(100%);transition:transform .5s var(--ease);border-left:1px solid var(--line);}
+  .nav-links.open{transform:translateX(0);}
+  .burger{display:flex;}
+  .nav-phone{display:none;}
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding-top:120px;padding-bottom:80px;
+  overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.05);}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(11,11,13,.55) 0%, rgba(11,11,13,.72) 45%, var(--ink-black) 96%),
+    linear-gradient(90deg, rgba(11,11,13,.92) 0%, rgba(11,11,13,.35) 55%, rgba(11,11,13,.75) 100%);
+}
+.grain{position:absolute;inset:0;z-index:1;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero-content{position:relative;z-index:2;max-width:760px;}
+.hero-content .eyebrow{margin-bottom:26px;}
+.hero-title{
+  font-size:clamp(44px,7vw,86px);
+  font-weight:500;
+  color:var(--paper);
+  margin-bottom:26px;
+}
+.print-line{display:block;overflow:hidden;}
+.print-line span{
+  display:inline-block;
+  transform:translateY(110%);
+  opacity:0;
+  animation:printReveal .9s var(--ease) forwards;
+}
+.hero-title .accent{
+  font-style:italic;color:var(--gold-bright);
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold-bright) 45%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+@keyframes printReveal{to{transform:translateY(0);opacity:1;}}
+
+.hero-sweep{
+  position:absolute;top:0;left:0;height:100%;width:8px;
+  background:linear-gradient(90deg,transparent,var(--gold-bright) 50%,transparent);
+  filter:blur(6px);opacity:.9;
+  animation:headSweep 2.6s var(--ease) 1;
+  animation-delay:.3s;
+  z-index:3;
+}
+@keyframes headSweep{
+  0%{left:0;opacity:0;}
+  8%{opacity:1;}
+  92%{opacity:1;}
+  100%{left:100%;opacity:0;}
+}
+
+.hero-sub{
+  font-size:17px;color:var(--text-dim);max-width:520px;margin-bottom:40px;line-height:1.7;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:56px;}
+.hero-spec{
+  display:flex;gap:34px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;color:var(--text-dim);
+  border-top:1px solid var(--line);padding-top:22px;
+}
+.hero-spec div span{display:block;color:var(--gold-bright);font-size:15px;margin-bottom:4px;}
+
+.scroll-cue{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--text-dim);
+  text-transform:uppercase;
+}
+.scroll-cue .line{width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite;}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ============ MARQUEE TICKER ============ */
+.ticker{
+  position:relative;z-index:5;
+  background:var(--gold);
+  color:var(--ink-black);
+  padding:14px 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.ticker-track{display:inline-flex;animation:marquee 34s linear infinite;}
+.ticker-track span{
+  font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:0 26px;display:inline-flex;align-items:center;gap:14px;
+}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============ SECTION GENERIC ============ */
+section{position:relative;padding:130px 0;}
+@media(max-width:768px){section{padding:90px 0;}}
+.section-head{max-width:640px;margin-bottom:70px;}
+.section-head h2{font-size:clamp(32px,4.2vw,50px);}
+.section-head p{color:var(--text-dim);margin-top:20px;font-size:16px;line-height:1.7;}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:44px;}}
+.about-img{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/5;}
+.about-img img{width:100%;height:100%;object-fit:cover;}
+.about-img::before{
+  content:'';position:absolute;inset:14px;border:1px solid rgba(244,239,228,.3);z-index:2;pointer-events:none;
+}
+.about-tag{
+  position:absolute;bottom:26px;left:26px;z-index:3;
+  background:rgba(11,11,13,.72);backdrop-filter:blur(10px);
+  border:1px solid var(--line);padding:14px 18px;border-radius:2px;
+  font-family:var(--mono);font-size:11px;color:var(--gold-bright);letter-spacing:.08em;
+}
+.about-copy p{color:var(--text-dim);font-size:16px;line-height:1.85;margin-bottom:20px;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;border-top:1px solid var(--line);padding-top:34px;}
+.stat b{
+  display:block;font-family:var(--display);font-size:38px;color:var(--gold-bright);font-weight:500;
+}
+.stat span{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;}
+
+/* ============ SERVICES ============ */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+@media(max-width:960px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.services-grid{grid-template-columns:1fr;}}
+.s-card{
+  position:relative;border-radius:6px;overflow:hidden;background:var(--panel);
+  border:1px solid var(--line);
+  transition:transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease);
+}
+.s-card:hover{transform:translateY(-8px);border-color:rgba(203,161,53,.55);box-shadow:0 30px 60px -30px rgba(203,161,53,.35);}
+.s-card .img-wrap{aspect-ratio:4/3;overflow:hidden;}
+.s-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
+.s-card:hover img{transform:scale(1.08);}
+.s-card-body{padding:22px 24px 26px;}
+.s-code{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px;display:block;}
+.s-card h3{font-size:20px;margin-bottom:8px;font-weight:500;}
+.s-card p{color:var(--text-dim);font-size:13.5px;line-height:1.6;}
+
+/* ============ GALLERY ============ */
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px;
+}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+.g-item{position:relative;overflow:hidden;border-radius:4px;cursor:pointer;}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
+.g-item:hover img{transform:scale(1.12);}
+.g-item::after{
+  content:attr(data-label);position:absolute;left:14px;bottom:12px;z-index:2;
+  font-family:var(--mono);font-size:11px;color:var(--paper);letter-spacing:.05em;
+  opacity:0;transition:opacity .4s;text-transform:uppercase;
+}
+.g-item::before{
+  content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,11,13,.85),transparent 55%);
+  opacity:0;transition:opacity .4s;z-index:1;
+}
+.g-item:hover::before,.g-item:hover::after{opacity:1;}
+.g-big{grid-column:span 2;grid-row:span 2;}
+
+/* lightbox */
+#lightbox{
+  position:fixed;inset:0;background:rgba(6,6,7,.94);z-index:2000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .4s, visibility .4s;
+  padding:40px;
+}
+#lightbox.open{opacity:1;visibility:visible;}
+#lightbox img{max-width:min(900px,90vw);max-height:80vh;object-fit:contain;border:1px solid var(--line);}
+#lightbox-close{position:absolute;top:34px;right:40px;font-family:var(--mono);font-size:13px;color:var(--paper);letter-spacing:.1em;border:1px solid var(--line);padding:10px 16px;}
+
+/* ============ WHY US ============ */
+.why-wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+@media(max-width:900px){.why-wrap{grid-template-columns:1fr;gap:40px;}}
+.counters{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+.counter b{font-family:var(--display);font-size:52px;color:var(--gold-bright);font-weight:500;display:block;}
+.counter span{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;}
+.feature-list{display:flex;flex-direction:column;}
+.f-row{
+  display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);
+}
+.f-row:first-child{border-top:1px solid var(--line);}
+.f-row h4{font-size:16px;font-weight:600;color:var(--paper);}
+.f-row p{font-size:13px;color:var(--text-dim);margin-top:3px;}
+
+/* ============ TESTIMONIALS ============ */
+.testi-row{display:flex;gap:24px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
+.testi-row::-webkit-scrollbar{display:none;}
+.t-card{
+  min-width:340px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:32px;flex-shrink:0;
+}
+.t-stars{color:var(--gold);letter-spacing:3px;margin-bottom:18px;font-size:14px;}
+.t-card p{color:var(--paper);font-size:15px;line-height:1.7;margin-bottom:22px;}
+.t-who{display:flex;align-items:center;gap:12px;}
+.t-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:14px;color:#1c1505;font-weight:600;}
+.t-who b{font-size:13.5px;display:block;}
+.t-who span{font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+
+/* ============ FAQ ============ */
+.faq-list{max-width:820px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:26px 0;text-align:left;font-size:17px;color:var(--paper);font-family:var(--display);font-weight:500;
+}
+.faq-q .plus{font-family:var(--mono);color:var(--gold);font-size:20px;transition:transform .4s var(--ease);}
+.faq-item.open .plus{transform:rotate(135deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease);}
+.faq-a p{color:var(--text-dim);padding-bottom:24px;line-height:1.75;font-size:14.5px;max-width:680px;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:44px;}}
+.field{margin-bottom:20px;}
+.field label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);display:block;margin-bottom:8px;}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--panel);border:1px solid var(--line);color:var(--paper);
+  padding:14px 16px;border-radius:2px;font-family:var(--body);font-size:14px;
+  transition:border-color .3s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold);}
+.field textarea{resize:vertical;min-height:110px;}
+
+.info-card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:36px;margin-bottom:24px;}
+.info-row{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);}
+.info-row:last-child{border-bottom:none;}
+.info-row b{display:block;font-size:14px;margin-bottom:3px;}
+.info-row span,.info-row a{font-family:var(--mono);font-size:13px;color:var(--text-dim);}
+.info-row a:hover{color:var(--gold-bright);}
+.map-panel{
+  position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:16/9;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(203,161,53,.15), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(244,239,228,.04) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, rgba(244,239,228,.04) 0 1px, transparent 1px 40px),
+    var(--panel);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;
+}
+.map-pin{width:44px;height:44px;border-radius:50% 50% 50% 0;background:var(--gold);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(203,161,53,.5);}
+.map-pin::after{content:'';width:14px;height:14px;background:var(--ink-black);border-radius:50%;transform:rotate(45deg);}
+
+/* ============ FOOTER ============ */
+footer{background:var(--panel-2);border-top:1px solid var(--line);padding:80px 0 30px;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:50px;margin-bottom:60px;}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+.footer-brand p{color:var(--text-dim);font-size:14px;line-height:1.7;margin:18px 0 22px;max-width:280px;}
+.footer-col h5{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.footer-col a{display:block;color:var(--text-dim);font-size:14px;margin-bottom:12px;transition:color .3s;}
+.footer-col a:hover{color:var(--gold-bright);}
+.socials{display:flex;gap:12px;margin-top:6px;}
+.socials a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;}
+.socials a:hover{border-color:var(--gold);color:var(--gold-bright);}
+.footer-bottom{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:.04em;}
+
+/* ============ FLOATING ============ */
+.floaters{position:fixed;bottom:28px;right:28px;z-index:400;display:flex;flex-direction:column;gap:14px;align-items:flex-end;}
+.fab{
+  width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);transition:transform .3s var(--ease);
+}
+.fab:hover{transform:scale(1.1);}
+.fab-wa{background:#25D366;color:#fff;}
+.fab-call{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1c1505;}
+.fab-top{
+  width:44px;height:44px;background:var(--panel);border:1px solid var(--line);color:var(--gold-bright);
+  font-size:15px;opacity:0;visibility:hidden;transform:translateY(10px);transition:.4s;
+}
+.fab-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+
+@media(max-width:640px){
+  .fab{width:48px;height:48px;font-size:19px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-mark">N · A · KASSAR</div>
+  <div class="loader-bar"></div>
+  <div class="loader-cmyk"><span></span><span></span><span></span><span></span></div>
+</div>
+
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<header id="header">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo"><span class="reg"><span class="reg-circle"></span></span> N.A. <b>Kassar</b></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">Studio</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:+917505942096" class="nav-phone">↳ 7505942096</a>
+        <a href="#contact" class="btn btn-gold" data-ripple>Get a Quote</a>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><img src="assets/hero-press.png" alt="Premium offset printing press running a full-colour job"></div>
+  <div class="grain"></div>
+  <div class="hero-sweep"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Registered in Quality — Est. Trusted Since Day One</div>
+    <h1 class="hero-title">
+      <span class="print-line"><span style="animation-delay:.15s">N.A. Kassar</span></span>
+      <span class="print-line"><span class="accent" style="animation-delay:.32s">Printing Solutions</span></span>
+    </h1>
+    <p class="hero-sub">Every plate aligned, every colour true. Premium flex, vinyl, card and brochure printing — produced fast, finished flawlessly, and delivered straight to your door.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-gold" data-ripple>Get a Quote</a>
+      <a href="tel:+917505942096" class="btn btn-ghost" data-ripple>Call Now</a>
+      <a href="https://wa.me/917505942096" target="_blank" rel="noopener" class="btn btn-ghost" data-ripple>WhatsApp</a>
+    </div>
+    <div class="hero-spec">
+      <div><span>4C+1</span>CMYK + Spot Gold</div>
+      <div><span>24–48h</span>Standard Turnaround</div>
+      <div><span>100%</span>Door-to-Door Delivery</div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-img reveal">
+      <img src="assets/press-run.jpeg" alt="Press operators running a full-colour print job in the Kassar workshop">
+      <div class="about-tag">Est. Workshop Floor / Batch №0192</div>
+    </div>
+    <div class="about-copy reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> The Studio</div>
+      <h2>Print is a craft.<br>We still treat it like one.</h2>
+      <p>N.A. Kassar Printing Solutions was built on a simple standard: colour should be exact, paper should feel right, and delivery should never be the customer's problem. From single visiting cards to full banner runs, every job passes through the same disciplined checks before it leaves our floor.</p>
+      <p>We run modern digital and large-format equipment alongside classic finishing techniques, so whether you need one hundred wedding invitations or a hundred metres of vinyl, the output looks and feels premium — at a price that stays fair.</p>
+      <div class="about-stats">
+        <div class="stat"><b>12k+</b><span>Jobs Completed</span></div>
+        <div class="stat"><b>24h</b><span>Avg. Turnaround</span></div>
+        <div class="stat"><b>98%</b><span>Repeat Clients</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> What We Print</div>
+      <h2>Fourteen crafts, one press floor</h2>
+      <p>Every service below is produced in-house and finished by hand-checked quality control before packing.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Recent Work</div>
+      <h2>Off the press</h2>
+      <p>A look at real jobs, real machines, and real finishes — tap any tile for a closer look.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="wrap why-wrap">
+    <div class="reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Why Kassar</div>
+      <h2 style="margin-bottom:34px;">Built for clients who notice the details</h2>
+      <div class="counters">
+        <div class="counter"><b data-count="12000">0</b><span>Jobs Printed</span></div>
+        <div class="counter"><b data-count="480">0</b><span>Active Clients</span></div>
+        <div class="counter"><b data-count="24">0</b><span>Hour Turnaround</span></div>
+        <div class="counter"><b data-count="9">0</b><span>Years Running</span></div>
+      </div>
+    </div>
+    <div class="feature-list reveal" id="featureList"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Client Word</div>
+      <h2>From the order book</h2>
+    </div>
+    <div class="testi-row reveal" id="testiRow"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Questions</div>
+      <h2>Good to know before you order</h2>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow"><span class="reg"><span class="reg-circle"></span></span> Get In Touch</div>
+      <h2 style="margin-bottom:26px;">Tell us what you're printing</h2>
+      <form id="quoteForm" onsubmit="return false;">
+        <div class="field"><label>Full Name</label><input type="text" required placeholder="Your name"></div>
+        <div class="field"><label>Phone / WhatsApp</label><input type="tel" required placeholder="+91"></div>
+        <div class="field"><label>Service</label>
+          <select>
+            <option>Flex Printing</option><option>Banner Printing</option><option>Visiting Cards</option>
+            <option>Wedding Cards</option><option>Pamphlets / Flyers</option><option>Brochures</option>
+            <option>Bill Books</option><option>Letterheads</option><option>Stickers</option>
+            <option>Vinyl Printing</option><option>Sunboard Printing</option><option>ID Cards</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label>Details</label><textarea placeholder="Quantity, size, deadline..."></textarea></div>
+        <button class="btn btn-gold" type="submit" data-ripple>Send Request</button>
+      </form>
+    </div>
+    <div class="reveal">
+      <div class="info-card">
+        <div class="info-row"><span class="reg"><span class="reg-circle"></span></span><div><b>Call</b><a href="tel:+917505942096">7505942096</a> · <a href="tel:+919719649264">9719649264</a></div></div>
+        <div class="info-row"><span class="reg"><span class="reg-circle"></span></span><div><b>WhatsApp</b><a href="https://wa.me/917505942096" target="_blank" rel="noopener">Chat with us instantly</a></div></div>
+        <div class="info-row"><span class="reg"><span class="reg-circle"></span></span><div><b>Service</b><span>Door-to-door pickup & delivery</span></div></div>
+      </div>
+      <a href="https://maps.app.goo.gl/SPmTekTHHeVmb3Cj6" target="_blank" rel="noopener" class="map-panel">
+        <div class="map-pin"></div>
+        <div>
+          <b style="display:block;font-family:var(--display);font-size:18px;margin-bottom:6px;">N.A. Kassar Printing Solutions</b>
+          <span style="font-family:var(--mono);font-size:12px;color:var(--text-dim);">Open in Google Maps →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="reg"><span class="reg-circle"></span></span> N.A. <b>Kassar</b></a>
+        <p>Premium printing, fast delivery, and a door-to-door service built around getting your job exactly right.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="https://wa.me/917505942096" aria-label="WhatsApp">WA</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <a href="#about">Studio</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a href="#services">Flex &amp; Banner</a><a href="#services">Visiting Cards</a><a href="#services">Wedding Cards</a><a href="#services">Brochures</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:+917505942096">7505942096</a><a href="tel:+919719649264">9719649264</a>
+        <a href="https://maps.app.goo.gl/SPmTekTHHeVmb3Cj6" target="_blank" rel="noopener">View on Map</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> N.A. Kassar Printing Solutions. All rights reserved.</span>
+      <span>Designed &amp; printed with precision.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATERS -->
+<div class="floaters">
+  <button class="fab fab-top" id="toTop" aria-label="Back to top">↑</button>
+  <a class="fab fab-call" href="tel:+917505942096" aria-label="Call">☎</a>
+  <a class="fab fab-wa" href="https://wa.me/917505942096" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lightbox-close">Close ✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- LOADER ---------- */
+window.addEventListener('load', ()=>{
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'), 500);
+});
+
+/* ---------- NAV ---------- */
+const header = document.getElementById('header');
+window.addEventListener('scroll', ()=>{
+  header.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('toTop').classList.toggle('show', window.scrollY > 700);
+});
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', ()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navLinks.classList.remove('open')));
+
+document.getElementById('toTop').addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ---------- RIPPLE ---------- */
+document.querySelectorAll('[data-ripple]').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    const r = document.createElement('span');
+    r.className='ripple';
+    const rect = this.getBoundingClientRect();
+    r.style.left = (e.clientX-rect.left)+'px';
+    r.style.top = (e.clientY-rect.top)+'px';
+    this.appendChild(r);
+    setTimeout(()=>r.remove(),600);
+  });
+});
+
+/* ---------- DATA ---------- */
+const services = [
+  {img:'assets/banner-flex.png', code:'FLX / 01', name:'Flex Printing', desc:'Weatherproof large-format flex for storefronts, launches and events.'},
+  {img:'assets/vinyl-sports-banner.png', code:'BNR / 02', name:'Banner Printing', desc:'Vivid, fade-resistant banners built for indoor and outdoor display.'},
+  {img:'assets/visiting-card-gold.jpeg', code:'CRD / 03', name:'Visiting Card Printing', desc:'Foil, matte and textured finishes that make a first impression last.'},
+  {img:'assets/wedding-card.jpeg', code:'WED / 04', name:'Wedding Card Printing', desc:'Gold-foiled, letterpress-style invitations for the big day.'},
+  {img:'assets/flyers.jpeg', code:'PMP / 05', name:'Pamphlet Printing', desc:'Sharp, colour-true pamphlets for campaigns and promotions.'},
+  {img:'assets/flyers.jpeg', code:'FLY / 06', name:'Flyer Printing', desc:'Fast-turnaround flyers that hold colour and crease cleanly.'},
+  {img:'assets/brochure.jpeg', code:'BRC / 07', name:'Brochure Printing', desc:'Tri-fold and bi-fold brochures finished to a corporate standard.'},
+  {img:'assets/billbook.jpeg', code:'BIL / 08', name:'Bill Book Printing', desc:'Sequentially numbered, carbonless bill books built for daily use.'},
+  {img:'assets/letterhead.jpeg', code:'LTR / 09', name:'Letterhead Printing', desc:'Premium stock letterheads that carry your brand on every page.'},
+  {img:'assets/stickers.jpeg', code:'STK / 10', name:'Sticker Printing', desc:'Die-cut vinyl stickers in any shape, size or finish.'},
+  {img:'assets/vinyl-machine.jpeg', code:'VNL / 11', name:'Vinyl Printing', desc:'Durable vinyl graphics for branding, vehicles and signage.'},
+  {img:'assets/press-run.jpeg', code:'SUN / 12', name:'Sunboard Printing', desc:'Lightweight, rigid sunboard prints for displays and hoardings.'},
+  {img:'assets/id-card.jpeg', code:'IDC / 13', name:'ID Card Printing', desc:'PVC ID cards with sharp print and secure lamination.'},
+  {img:'assets/vinyl-banner.png', code:'D2D / 14', name:'Door-to-Door Service', desc:'Pickup, production and delivery — handled without you leaving your desk.'},
+];
+
+const servicesGrid = document.getElementById('servicesGrid');
+services.forEach(s=>{
+  servicesGrid.insertAdjacentHTML('beforeend', `
+    <div class="s-card reveal">
+      <div class="img-wrap"><img src="${s.img}" alt="${s.name}" loading="lazy"></div>
+      <div class="s-card-body">
+        <span class="s-code">${s.code}</span>
+        <h3>${s.name}</h3>
+        <p>${s.desc}</p>
+      </div>
+    </div>`);
+});
+
+const tickerTrack = document.getElementById('tickerTrack');
+const tickerItems = services.map(s=>`<span><span class="reg"><span class="reg-circle"></span></span>${s.name}</span>`).join('');
+tickerTrack.innerHTML = tickerItems + tickerItems;
+
+const galleryImgs = [
+  {img:'assets/hero-press.png', label:'Offset Press Floor', big:true},
+  {img:'assets/press-run.jpeg', label:'Digital Print Run'},
+  {img:'assets/vinyl-banner.png', label:'Vinyl Banner Output'},
+  {img:'assets/visiting-card-gold.jpeg', label:'Foil Visiting Cards'},
+  {img:'assets/wedding-card.jpeg', label:'Wedding Invitation Suite'},
+  {img:'assets/billbook.jpeg', label:'Bill Book Stock'},
+  {img:'assets/brochure.jpeg', label:'Corporate Brochures'},
+  {img:'assets/stickers.jpeg', label:'Die-Cut Stickers'},
+  {img:'assets/id-card.jpeg', label:'ID Card Batch'},
+  {img:'assets/vinyl-sports-banner.png', label:'Event Banner Print'},
+  {img:'assets/letterhead.jpeg', label:'Letterhead Set'},
+  {img:'assets/vinyl-machine.jpeg', label:'Vinyl Roll Printing'},
+];
+const galleryGrid = document.getElementById('galleryGrid');
+galleryImgs.forEach((g,i)=>{
+  galleryGrid.insertAdjacentHTML('beforeend', `
+    <div class="g-item ${g.big?'g-big':''} reveal" data-label="${g.label}">
+      <img src="${g.img}" alt="${g.label}" loading="lazy">
+    </div>`);
+});
+document.querySelectorAll('.g-item').forEach(item=>{
+  item.addEventListener('click', ()=>{
+    const img = item.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('open');
+  });
+});
+document.getElementById('lightbox-close').addEventListener('click', ()=>document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lightbox').addEventListener('click', e=>{ if(e.target.id==='lightbox') e.currentTarget.classList.remove('open'); });
+
+const features = [
+  {t:'Premium Quality', d:'Every job checked for colour accuracy before it leaves the floor.'},
+  {t:'Fast Delivery', d:'Most standard orders complete within 24–48 hours.'},
+  {t:'Affordable Pricing', d:'Transparent, competitive rates with no hidden charges.'},
+  {t:'Professional Design', d:'In-house layout support to get your artwork print-ready.'},
+  {t:'Door-to-Door Service', d:'We collect files and deliver finished prints to your location.'},
+  {t:'Modern Equipment', d:'Digital and large-format machines maintained to spec.'},
+];
+const featureList = document.getElementById('featureList');
+features.forEach(f=>{
+  featureList.insertAdjacentHTML('beforeend', `
+    <div class="f-row"><span class="reg"><span class="reg-circle"></span></span><div><h4>${f.t}</h4><p>${f.d}</p></div></div>`);
+});
+
+const testimonials = [
+  {n:'Rohan Mehta', r:'Event Organizer', t:'Ordered banners two days before our festival — colours came out exactly like the proof, and delivery was right on time.'},
+  {n:'Sana Kapoor', r:'Boutique Owner', t:'The gold-foil visiting cards feel genuinely premium. Customers ask where I got them printed.'},
+  {n:'Imran Sheikh', r:'Wedding Planner', t:'Wedding card orders are always handled with care — every batch has matched perfectly across ceremonies.'},
+  {n:'Divya Rao', r:'Store Manager', t:'Bill books arrive numbered correctly every single time. Small detail, but it matters for our accounts.'},
+];
+const testiRow = document.getElementById('testiRow');
+testimonials.forEach(t=>{
+  testiRow.insertAdjacentHTML('beforeend', `
+    <div class="t-card">
+      <div class="t-stars">★★★★★</div>
+      <p>"${t.t}"</p>
+      <div class="t-who"><div class="t-avatar">${t.n.split(' ').map(w=>w[0]).join('')}</div><div><b>${t.n}</b><span>${t.r}</span></div></div>
+    </div>`);
+});
+
+const faqs = [
+  {q:'What is your standard turnaround time?', a:'Most standard jobs — visiting cards, flyers, stickers — are completed within 24 to 48 hours. Large-format flex and banner orders may take slightly longer depending on quantity.'},
+  {q:'Do you offer door-to-door pickup and delivery?', a:'Yes. We collect your design files or physical materials and deliver the finished print directly to your address, at no extra hassle to you.'},
+  {q:'Can you help design my artwork?', a:'Absolutely. Our in-house team can prepare print-ready artwork from your logo, text or reference images if you do not already have a finished design.'},
+  {q:'What file formats do you accept?', a:'We accept PDF, AI, PSD, CDR and high-resolution JPEG/PNG files. For best results, artwork should be at least 300 DPI at final print size.'},
+  {q:'Do you print bulk or wholesale orders?', a:'Yes, we regularly handle bulk orders for bill books, stickers, brochures and banners with pricing that scales down per unit at higher volumes.'},
+];
+const faqList = document.getElementById('faqList');
+faqs.forEach((f,i)=>{
+  faqList.insertAdjacentHTML('beforeend', `
+    <div class="faq-item">
+      <button class="faq-q"><span>${f.q}</span><span class="plus">+</span></button>
+      <div class="faq-a"><p>${f.a}</p></div>
+    </div>`);
+});
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', ()=>{
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(fi=>{fi.classList.remove('open'); fi.querySelector('.faq-a').style.maxHeight=null;});
+    if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight+'px'; }
+  });
+});
+
+/* ---------- SCROLL REVEAL ---------- */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); revealObserver.unobserve(en.target); } });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+// observe dynamically added cards too
+setTimeout(()=>{document.querySelectorAll('.reveal:not(.in)').forEach(el=>revealObserver.observe(el));},50);
+
+/* ---------- COUNTERS ---------- */
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const el = en.target;
+      const target = +el.dataset.count;
+      let cur = 0;
+      const step = Math.max(1, target/60);
+      const tick = ()=>{
+        cur += step;
+        if(cur >= target){ el.textContent = target.toLocaleString()+'+'; return; }
+        el.textContent = Math.floor(cur).toLocaleString();
+        requestAnimationFrame(tick);
+      };
+      tick();
+      counterObserver.unobserve(el);
+    }
+  });
+},{threshold:.5});
+counters.forEach(c=>counterObserver.observe(c));
+
+/* ---------- PARTICLES (subtle floating ink dots) ---------- */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();
+window.addEventListener('resize', resize);
+const colors = ['#cba135','#19b6c9','#d13d78'];
+for(let i=0;i<34;i++){
+  particles.push({
+    x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.6+.4,
+    vy:Math.random()*.25+.05, c:colors[Math.floor(Math.random()*colors.length)], o:Math.random()*.5+.15
+  });
+}
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    p.y -= p.vy;
+    if(p.y < -10){ p.y = H+10; p.x = Math.random()*W; }
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = p.c;
+    ctx.globalAlpha = p.o;
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ---------- FORM ---------- */
+document.getElementById('quoteForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  const original = btn.textContent;
+  btn.textContent = 'Request Sent ✓';
+  setTimeout(()=>{ btn.textContent = original; this.reset(); }, 2400);
+});
+</script>
+</body>
+</html>
